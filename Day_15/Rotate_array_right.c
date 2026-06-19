@@ -13,7 +13,7 @@ int main()
     }
     printf("Original array:");
     for (int i = 0; i < n; i++)
-    {
+    {   
         printf("%d ", arr[i]);//prints original array
     }
     int p;
