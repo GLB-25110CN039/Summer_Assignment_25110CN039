@@ -3,21 +3,39 @@
 int main()
 {
     char str[100];
+    int len = 0;//length of current word
+    int maxlen = 0;//length of longest word
+    int start = 0;//index of current word
+    int maxstart = 0;//index of longest word
     printf("Enter a string to find longest word in it: ");
-    fgets(str, sizeof(str), stdin);
-    int letter, longest = 0;
-    // for loop will check number of words and number of letters in a single word
-    for (int i = 0; i<=strlen(str); i++)
+    fgets(str, sizeof(str), stdin);//input string
+    for (int i = 0; str[i] != '\0'; i++)
     {
-        for (letter = 0; str[i] != '\0' && str[i] != ' '; i++)
+        if (str[i] != '\n' && str[i] != ' ')//means current word is still there
         {
-            letter++;
+            len++;
         }
-        if (letter > longest)
+        else//current word has ended
         {
-            longest = letter;
+            if (len > maxlen)//it will check if current word is longest or not
+            {
+                maxlen = len;
+                maxstart = start;
+            }
+            len = 0;//reset for next word
+            start = i + 1;
         }
     }
-    printf(" length of Longest word in the string is : %d", longest);
+    if (len > maxlen)//it will check for last word
+    {
+        maxlen = len;
+        maxstart = start;
+    }
+    printf("Longest word in the string is : ");
+    for (int i = maxstart; i < maxstart + maxlen; i++)
+    {
+        printf("%c", str[i]);
+    }
+    printf("\nLength =%d", maxlen);
     return 0;
 }
